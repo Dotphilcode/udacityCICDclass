@@ -32,4 +32,4 @@ workflows:
     jobs:
       - say-hello
       - say-myName
-          requires: [say-hello]
+          requires [say-hello]
