@@ -24,7 +24,7 @@ jobs:
       - checkout
       - run:
           name: "Say my Name"
-          command: "My Name is Philip"
+          command: "echo My Name is Philip"
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
