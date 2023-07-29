@@ -25,6 +25,15 @@ jobs:
       - run:
           name: "Say my Name"
           command: "echo My Name is Philip"
+      - run:
+          name: "My name as env var"
+          command: echo $MY_NAME_VAR
+      - run:
+          name: "My surname as env var"
+          command: echo ${SURNAME_VAR}
+      - run:
+          name: "Using built-in env var, identify the branch that I am on"
+          command: echo $CIRCLE_BRANCH
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
