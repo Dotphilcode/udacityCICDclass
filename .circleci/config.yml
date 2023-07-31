@@ -49,7 +49,7 @@ jobs:
       - run:
           name: "check output"
           command: | 
-            if [[ 'cat ~/workspace/output.txt' == "My Name is Philip" ]]; then
+            if [[ $(cat ~/workspace/output.txt) == "My Name is Philip" ]]; then
               echo "It is working!!!"
             else
               echo "Not working as expected !!"; exit 1
