@@ -45,7 +45,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-        at: ~/
+          at: ~/
       - run:
           if [[ 'cat ~/output.txt' == "My Name is Philip" ]]; then
             echo "It is working!!!"
