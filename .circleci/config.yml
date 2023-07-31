@@ -48,7 +48,7 @@ jobs:
           at: ~/
       - run:
           name: "check output"
-          command: | 
+          command: |
             if [[ $(cat ~/output.txt) == "My Name is Philip" ]]; then
               echo "It is working!!!"
             else
@@ -64,4 +64,3 @@ workflows:
       - print_output_file:
           requires:
             - save_hello_world_output
-      
