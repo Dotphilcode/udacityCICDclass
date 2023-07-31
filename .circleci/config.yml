@@ -35,9 +35,9 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo "My Name is Philip" > ~/output.txt
+      - run: echo "My Name is Philip" > ~/workspace/output.txt
       - persist_to_workspace:
-          root: ~/
+          root: ~/workspace/
           paths:
             - output.txt
   print_output_file:
@@ -45,12 +45,14 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-          at: ~/
+          at: ~/workspace/
       - run:
-          if [[ 'cat ~/output.txt' == "My Name is Philip" ]]; then
-            echo "It is working!!!"
-          else
-            echo "Not working as expected !!"; exit 1
+          name: "check output"
+          command: | 
+            if [[ 'cat ~/workspace/output.txt' == "My Name is Philip" ]]; then
+              echo "It is working!!!"
+            else
+              echo "Not working as expected !!"; exit 1
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
@@ -62,4 +64,4 @@ workflows:
       - print_output_file:
           requires:
             - save_hello_world_output
-
+      
