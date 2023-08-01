@@ -63,7 +63,7 @@ jobs:
               echo "It is working!!!"
             else
               echo "Not working as expected !!"; exit 1
-            fi:
+            fi
 
   usingCommand:
     docker:
