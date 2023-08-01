@@ -2,6 +2,16 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
+commands:
+  print_pipeline_id:
+    description: "this enables this part of the code to be reusable"
+    parameters:
+      to:
+        type: string
+        default: "$CIRCLE_WORKFLOW_ID"
+    steps:
+      run: echo << parameters.to >>
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
@@ -53,7 +63,15 @@ jobs:
               echo "It is working!!!"
             else
               echo "Not working as expected !!"; exit 1
-            fi
+            fi:
+
+  usingCommand:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - print_pipeline_id:
+          to: "$CIRCLE_WORKFLOW_ID"
+
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
@@ -65,3 +83,5 @@ workflows:
       - print_output_file:
           requires:
             - save_hello_world_output
+      - usingCommand
+
