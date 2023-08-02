@@ -8,7 +8,7 @@ commands:
     parameters:
       to:
         type: string
-        default: "$CIRCLE_WORKFLOW_ID"
+        default: "$CIRCLE_WORKFLOW_ID"    # optional
     steps:
       - run: echo << parameters.to >>
 
@@ -72,6 +72,26 @@ jobs:
       - print_pipeline_id:
           to: "$CIRCLE_WORKFLOW_ID"
 
+  job_failure_testing1:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+          name: "My name as env var"
+          command: echo "This build is from << pipeline.project.typesss >>""   # the correct variable value is pipeline.project.type
+
+  job_failure_testing2:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+          name: "My name as env var"
+          command: echo "This build is triggered by << pipeline.git.branch >> branch"
+          when: on_fail
+
+
+
+
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
@@ -84,4 +104,6 @@ workflows:
           requires:
             - save_hello_world_output
       - usingCommand
+      - job_failure_testing1
+      - job_failure_testing2
 
