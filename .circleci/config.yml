@@ -93,8 +93,8 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - run:
-          name: "My name as env var"
-          command: echo This build is triggered by << pipeline.git.branch >> branch
+          name: "error bypass"
+          command: echo One of your jobs failed
           when: on_fail
 
 
