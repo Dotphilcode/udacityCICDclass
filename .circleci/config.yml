@@ -76,9 +76,17 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
+      - attach_workspace:
+          at: ~/
       - run:
-          name: "My name as env var"
-          command: echo "This build is from << pipeline.project.typesss >>""   # the correct variable value is pipeline.project.type
+          name: "check output"
+          command: |
+            if [[ $(cat ~/output.txt) == "My Name is Philip" ]]; then
+              echo "It is working!!!"
+            else
+              echo "Not working as expected !!"; exit 1
+            fi:
+          # note, in the last line above, fi should not have a column. It was intentionally added to introduce an error
 
   job_failure_testing2:
     docker:
@@ -88,8 +96,6 @@ jobs:
           name: "My name as env var"
           command: echo "This build is triggered by << pipeline.git.branch >> branch"
           when: on_fail
-
-
 
 
 # Orchestrate jobs using workflows
