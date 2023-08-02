@@ -76,17 +76,9 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - attach_workspace:
-          at: ~/
       - run:
-          name: "check output"
-          command: |
-            if [[ $(cat ~/output.txt) == "My Name is Philip" ]]; then
-              echo "It is working!!!"
-            else
-              echo "Not working as expected !!"; exit 1
-            fi:
-          # note, in the last line above, fi should not have a column. It was intentionally added to introduce an error
+          name: "error testing"
+          command: return 1
 
   job_failure_testing2:
     docker:
@@ -94,7 +86,7 @@ jobs:
     steps:
       - run:
           name: "error bypass"
-          command: echo One of your jobs failed
+          command: echo "One of your jobs failed"
           when: on_fail
 
 
