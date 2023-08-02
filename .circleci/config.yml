@@ -72,6 +72,7 @@ jobs:
       - print_pipeline_id:
           to: "$CIRCLE_WORKFLOW_ID"
 
+# Using on_fail to skip a step that fails to another step
   job_failure_testing1:
     docker:
       - image: circleci/node:13.8.0
@@ -83,6 +84,7 @@ jobs:
           name: "error bypass with on_fail"
           command: echo "one of your jobs failed from << pipeline.git.branch >> branch"
           when: on_fail
+
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
@@ -97,5 +99,4 @@ workflows:
             - save_hello_world_output
       - usingCommand
       - job_failure_testing1
-      - job_failure_testing2
 
