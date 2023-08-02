@@ -94,7 +94,7 @@ jobs:
     steps:
       - run:
           name: "My name as env var"
-          command: echo "This build is triggered by << pipeline.git.branch >> branch"
+          command: echo This build is triggered by << pipeline.git.branch >> branch
           when: on_fail
 
 
